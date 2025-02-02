@@ -22,6 +22,9 @@ namespace AmhPorterTest.Utils
         private string? sysDirStoragePath { get; set; }
         private string? sysDirRuntimePath { get; set; }
         private string? sysDirRuntimeTempPath { get; set; }
+        private string? resourceCorpusPath { get; set; }
+        private string? resourceCorpusBackupPath { get; set; }
+        private string? resourceStopwordsPath { get; set; }
         //private string runRawFilePath { get; set; }
         private string? runTokenFilePath { get; set; }
         private string? corpusPath { get; set; }
@@ -45,6 +48,12 @@ namespace AmhPorterTest.Utils
         {
 
             workingDirectory = Environment.CurrentDirectory;
+            Directory.CreateDirectory(Path.Combine(workingDirectory, "Resource", "Corpus"));
+            Directory.CreateDirectory(Path.Combine(workingDirectory, "Resource", "CorpusBackup"));
+            Directory.CreateDirectory(Path.Combine(workingDirectory, "Resource", "Stopwords"));
+            resourceCorpusPath = Path.Combine(workingDirectory, "Resource", "Corpus");
+            resourceCorpusBackupPath = Path.Combine(workingDirectory, "Resource", "CorpusBackup");
+            resourceStopwordsPath = Path.Combine(workingDirectory, "Resource", "Stopwords");
             Directory.CreateDirectory(Path.Combine(workingDirectory, "SystemData", "storage"));
             Directory.CreateDirectory(Path.Combine(workingDirectory, "SystemData", "runtime"));
             Directory.CreateDirectory(Path.Combine(workingDirectory, "SystemData", "runtime", "temp"));
@@ -55,6 +64,7 @@ namespace AmhPorterTest.Utils
             corpusPath = Path.Combine(workingDirectory, "Resource", "Corpus");
             //runRawFilePath = Path.Combine(sysDirRuntimeTempPath, "rawData.txt");
             runTokenFilePath = Path.Combine(workingDirectory, "SystemData", "runtime", "temp");
+            WriteResources();
         }
 
         public bool CheckCorpusDirectoryContentCount()
@@ -276,7 +286,31 @@ namespace AmhPorterTest.Utils
             }
         }
 
+        private void WriteResources()
+        {
 
+
+            string stopwords = "ስለዚህ,እኔም,በጣም,ይችላል,ይሆናል,በቃ,አሁን,ራሴ,እኛ,የእኛ,እራሳችን,እና,ስለዚህ,በመሆኑም,ሁሉ,ሆነ,ሌላ,ልክ,ስለ,በቀር,ብቻ," +
+                "ና,አንዳች,አንድ,እንደ,ስለሚሆን,እንጂ,ያህል,ይልቅ,ወደ,እኔ,የእኔ,ያደርጋል,አደረገው,መሥራት,እና,ግን,ከሆነ,ወይም,ምክንያቱም," +
+                "እንደ,እስከ,ቢሆንም,ጋር,ላይ,መካከል,በኩል,ወቅት,በኋላ,ከላይ,በርቷል,ጠፍቷል,በላይ,አንቺ,የእርስዎ,ራስህ,ራሳችሁ,እሱ,እሱን,የእሱ,ራሱ,እርሷ,የእሷ,ራሷ," +
+                "እነሱ,እነሱን,የእነሱ,እራሳቸው,ምንድን,የትኛው,ማንን,ይህ,እነዚህ,እነዚያ,ነኝ,ነው,ናቸው,ነበር,ነበሩ,ሁን,ነበር,መሆን,አለኝ,አለው," +
+                "ነበረ,መኖር,ስር,እንደገና,ተጨማሪ,ከዚያ,አንዴ,እዚህ,እዚያ,መቼ,የት,እንዴት,ሁሉም,ማናቸውም,ሁለቱም,እያንዳንዱ,ጥቂቶች,ተጨማሪ,በጣም,ሌላ,አንዳንድ," +
+                "አይ,ወይም,አይደለም,ብቻ,የራስ,ተመሳሳይ";
+
+            string stopwordsQuery = "ስለዚህ,እኔም,በጣም,ይችላል,ይሆናል,በቃ,አሁን,ራሴ,እኛ,የእኛ,እራሳችን,እና,ስለዚህ,በመሆኑም,ሁሉ,ሆነ,ሌላ,ልክ,ስለ,በቀር,ብቻ," +
+                "ና,አንዳች,አንድ,እንደ,ስለሚሆን,እንጂ,ያህል,ይልቅ,ወደ,እኔ,የእኔ,ያደርጋል,አደረገው,መሥራት,እና,ግን,ከሆነ,ምክንያቱም,እንደ,እስከ,ቢሆንም,ጋር,ላይ,መካከል," +
+                "በኩል,ወቅት,በኋላ,ከላይ,በርቷል,ጠፍቷል,በላይ,አንቺ,የእርስዎ,ራስህ,ራሳችሁ,እሱ,እሱን,የእሱ,ራሱ,እርሷ,የእሷ,ራሷ,እነሱ,እነሱን,የእነሱ,እራሳቸው,ምንድን,የትኛው," +
+                "ማንን,ይህ,እነዚህ,እነዚያ,ነኝ,ነው,ናቸው,ነበር,ነበሩ,ሁን,ነበር,መሆን,አለኝ,አለው,ነበረ,መኖር,ስር,እንደገና,ተጨማሪ,ከዚያ,አንዴ,እዚህ,እዚያ,መቼ,የት,እንዴት," +
+                "ሁሉም,ማናቸውም,ሁለቱም,እያንዳንዱ,ጥቂቶች,ተጨማሪ,በጣም,ሌላ,አንዳንድ,አይ,አይደለም,ብቻ,የራስ,ተመሳሳይ";
+
+
+            File.WriteAllText(Path.Combine(resourceStopwordsPath, "Stopwords.txt"), stopwords);
+            File.WriteAllText(Path.Combine(resourceStopwordsPath, "StopwordsQuery.txt"), stopwordsQuery);
+            File.WriteAllText(Path.Combine(sysDirRuntimePath, "Stopwords.txt"), stopwords);
+            File.WriteAllText(Path.Combine(sysDirRuntimePath, "StopwordsQuery.txt"), stopwordsQuery);
+
+
+        }
 
     }
 }
