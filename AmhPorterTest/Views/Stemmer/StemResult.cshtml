@@ -1,0 +1,25 @@
+﻿
+@model ResultCollection
+
+
+@{
+	ViewData["Title"] = "Stemming Results";
+}
+
+<div class="container mt-5">
+    <h1>Stemmed Words</h1>
+        
+    @if (Model.customWords != null && Model.customWords.customWords.Any())
+    {
+        <ul class="list-group">
+            @for(int i = 0; i < Model.customWords.customWords.Count; i++)
+            {
+                <li class="list-group-item"><h3>@Model.inputWords[i].word -&gt; @Model.customWords.customWords[i].word</h3></li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No items available.</p>
+    }
+</div>

@@ -1,0 +1,54 @@
+﻿@model CustomWordList
+
+
+@{
+    ViewData["Title"] = "Search Page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Stemmer Page</h1>
+</div>
+
+
+<div>
+    <h1>Word Stemmer</h1>
+
+    @using (Html.BeginForm("Stem", "Stemmer", FormMethod.Post))
+    {
+        <div class="form-group">
+
+            <p><em>The Following words are considered Stop Words for Amharic and as such the Stemmer <b>DOES NOT</b> consider them or their variations as valid inputs</em></p>
+            <ul>
+                <li>እንዴት (how)</li>
+                <li>ነ (is)</li>
+                <li>አንድ (one)</li>
+                <li>እኔ (I)</li>
+                <li>አንቺ (you, female)</li>
+                <li>አንተ (you, male)</li>
+                <li>እንደ (like)</li>
+                <li>እንዲህ (this way)</li>
+                <li>እንግዲህ (then)</li>
+                <li>ነገር (but)</li>
+                <li>ለ (for/to)</li>
+                <li>እንደዚህ (like this)</li>
+                <li>ወይም (or)</li>
+                <li>ይህ (this)</li>
+                <li>ይህን (this one)</li>
+                <li>አሁን (now)</li>
+                <li>ወደ (to)</li>
+                <li>ይኖር (will be)</li>
+                <li>ነው (is)</li>
+            </ul>
+
+            <label for="Query">Input Word</label>
+            <input name="Query" id="InputWord" class="form-control" placeholder="Word" required />
+            <br />
+            <p>You can use one or more words from this list : የበሮች የበጎች ዳኞች ደብተሮች የመስመር የስልክ ወረኞች እያስተማረ እየመጣ እነማንቼስተር እንደፍላጎታቸዉ እንደየሃሳባቸዉ በየመኪና በቦርሳ</p>
+            <input class="btn btn-outline-primary text-dark" type="submit" value="Stem" />
+        </div>
+    }
+
+
+
+</div>

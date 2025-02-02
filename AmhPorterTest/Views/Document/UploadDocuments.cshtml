@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Upload Documents";
+}
+<h2>Upload Documents</h2>
+<p>Only .txt files are allowed. You can upload multiple files at once.</p>
+
+<form asp-action="UploadDocuments" asp-controller="Document" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="files">Select .txt files:</label>
+        <input type="file" id="files" name="files" class="form-control" accept=".txt" multiple required>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Upload</button>
+</form>
+
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-info mt-3">
+        @ViewData["Message"]
+    </div>
+}

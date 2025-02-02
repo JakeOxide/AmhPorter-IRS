@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to AmhPorter IR System v2.0</h1>
+</div>
+
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="@Url.Action("Search", "Search")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <img src="~/images/search.jpeg" class="card-img-top" alt="Search">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Search</h5>
+                        <p class="card-text">Perform a search in the IR system.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-6">
+            <a href="@Url.Action("Upload", "Document")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <img src="~/images/upload.jpeg" class="card-img-top" alt="Upload">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Upload Documents</h5>
+                        <p class="card-text">Upload new documents to the system.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        @* <div class="col-md-4">
+            <a href="@Url.Action("Analytics", "Reports")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <img src="~/images/analytics.jpeg" class="card-img-top" alt="Analytics">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Analytics</h5>
+                        <p class="card-text">View system analytics and reports.</p>
+                    </div>
+                </div>
+            </a>
+        </div> *@
+
+    </div>
+</div>
