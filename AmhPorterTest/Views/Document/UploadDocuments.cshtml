@@ -2,7 +2,8 @@
     ViewData["Title"] = "Upload Documents";
 }
 <h2>Upload Documents</h2>
-<p>Only .txt files are allowed. You can upload multiple files at once.</p>
+<p style="color:red; font-weight:700; font-size:22;"><em>Only .txt files are allowed. </em></p>
+<p style="color:green; font-weight:700; font-size:22;"><em>You can upload multiple files at once.</em></p>
 
 <form asp-action="UploadDocuments" asp-controller="Document" method="post" enctype="multipart/form-data">
     <div class="form-group">
