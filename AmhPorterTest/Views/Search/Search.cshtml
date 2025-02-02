@@ -14,7 +14,7 @@
 
     @using (Html.BeginForm("StartSearch", "Search", FormMethod.Get, new { @class = "d-flex" })) //new { @class = "d-flex" }
     {
-        <input name="Query" class="form-control me-2" style="width: 700px" type="search" placeholder="Search" aria-label="Search" autocomplete="off" required value="@if(Model != null) string.Join(' ', Model.query); else {  }">
+        <input name="Query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" autocomplete="off" required value="@if(Model != null) string.Join(' ', Model.query); else {  }">
         <input class="btn btn-outline-primary text-dark" type="submit" value="Search" />
     }
 
@@ -60,11 +60,11 @@
 <!-- Custom Styling -->
 <style>
     .results-container {
-        max-height: 600px; /* Adjust height as needed */
+        max-height: 600px; 
         overflow-y: auto;
-        padding-right: 10px; /* Prevent scrollbar from overlapping content */
+        padding-right: 10px; 
         max-width: 1800px;
-        border-block: 4px solid #555555; /* Accent border for a modern look */
+        border-block: 4px solid #555555; 
         padding: 25px;
 
     }
@@ -75,7 +75,7 @@
 
     .card {
         background-color: #aaaaaa;
-        border-left: 4px solid #007bff; /* Accent border for a modern look */
+        border-left: 4px solid #007bff; 
     }
 
     .card-body {
