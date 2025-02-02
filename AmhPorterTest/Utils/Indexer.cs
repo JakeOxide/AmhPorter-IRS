@@ -6,7 +6,7 @@ namespace AmhPorterTest.Utils
     public class Indexer
     {
 
-        public Dictionary<string, HashSet<Int64>> index = new Dictionary<string, HashSet<Int64>>();
+        public Dictionary<string, HashSet<Int64>> index { get; set; } = new Dictionary<string, HashSet<Int64>>();
 
 
         public void AddDocument(Int64 docId, List<CustomWord> content)

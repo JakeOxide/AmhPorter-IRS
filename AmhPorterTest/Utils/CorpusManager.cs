@@ -38,7 +38,9 @@ namespace AmhPorterTest.Utils
         public string operation { get; set; }
         private SearchProcessor searchProcessor { get; set; }
         private List<string>? queries { get; set; }
-        public Result searchResult { get; set; }    
+        public Result searchResult { get; set; }
+
+        public Dictionary<string, HashSet<Int64>> index { get; set; } = new Dictionary<string, HashSet<Int64>>();
 
         private string line = "----------------------------------------------------------------------------------------------------";
         private string lineShort = "--------------------------------------------------";
@@ -114,6 +116,7 @@ namespace AmhPorterTest.Utils
                     indexer.AddDocument(documents.ElementAt(i).DocumentID, documents.ElementAt(i).DocumentTokens);
                 }
                 indexer.SaveToFile(Path.Combine(sysDirRuntimeTempPath, "index.txt"));
+                index = indexer.index;
             }
             else
             {
@@ -133,14 +136,14 @@ namespace AmhPorterTest.Utils
         public ResultParentModel TriggerSearch()
         {
             if (queries.Count == 0) return new ResultParentModel(null, new HashSet<Int64>(), new List<(CorpusDocument, double)>());
-            searchProcessor = new SearchProcessor(queries, indexer, operation, documents);
+            searchProcessor = new SearchProcessor(queries, index, operation, documents);
             searchResult = searchProcessor.CommenceSearch();
-            var result = searchResult.resultDocuments;
+            /*var result = searchResult.resultDocuments;
             Console.WriteLine("--- Results ---");
             foreach ( var document in result )
             {
                 Console.WriteLine($"{document.Item1.DocumentTitle} -> {document.Item2}");
-            }
+            }*/
 
             ResultParentModel rm = new ResultParentModel(searchResult.query, searchResult.resultSet, searchResult.resultDocuments);
             return rm;

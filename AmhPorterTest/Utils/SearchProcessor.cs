@@ -7,14 +7,14 @@ namespace AmhPorterTest.Utils
     {
 
         public List<string> query { get; set; }
-        public Indexer indexer { get; set; }
+        public Dictionary<string, HashSet<Int64>> indexer { get; set; }
         public string operation { get; set; }  
         public Result result { get; set; } = new Result();
         public List<CorpusDocument> documents { get; set; } 
 
 
 
-        public SearchProcessor(List<string> query, Indexer indexer, string operation, List<CorpusDocument> documents)
+        public SearchProcessor(List<string> query, Dictionary<string, HashSet<Int64>> indexer, string operation, List<CorpusDocument> documents)
         {
             this.query = query;
             this.indexer = indexer; 
@@ -52,13 +52,13 @@ namespace AmhPorterTest.Utils
         {
             if (query.Count < 1) return new HashSet<Int64>(); // Need at least 2 words
 
-            HashSet<Int64> resultSet = indexer.index.ContainsKey(query[0]) ? new HashSet<Int64>(indexer.index[query[0]]) : new HashSet<Int64>();
+            HashSet<Int64> resultSet = indexer.ContainsKey(query[0]) ? new HashSet<Int64>(indexer[query[0]]) : new HashSet<Int64>();
 
             for (int i = 1; i < query.Count; i++)
             {
-                if (!indexer.index.ContainsKey(query[i])) continue;
+                if (!indexer.ContainsKey(query[i])) continue;
 
-                HashSet<Int64> termDocs = new HashSet<Int64>(indexer.index[query[i]]);
+                HashSet<Int64> termDocs = new HashSet<Int64>(indexer[query[i]]);
 
                 if (operation == "እና")
                     resultSet.IntersectWith(termDocs); // Common docs
@@ -87,8 +87,8 @@ namespace AmhPorterTest.Utils
         // Compute Inverse Document Frequency (IDF)
         private double ComputeIDF(string term)
         {
-            if (!indexer.index.ContainsKey(term)) return 0;
-            int docCount = indexer.index[term].Count;
+            if (!indexer.ContainsKey(term)) return 0;
+            int docCount = indexer[term].Count;
             double result = (double)documents.Count / docCount;
             return Math.Log10(result);
         }

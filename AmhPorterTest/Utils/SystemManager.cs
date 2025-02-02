@@ -11,6 +11,7 @@ namespace AmhPorterTest.Utils
 
         private Stemmer stemmer { get; set; }
 
+
         public SystemManager()
         {
 
@@ -39,7 +40,6 @@ namespace AmhPorterTest.Utils
                     corpusManager.TriggerStemmer();
                     corpusManager.TriggerStopwordRemoval();
                     corpusManager.TriggerIndexer(0);
-
                     // To dump results of operations in system directory
                     //corpusManager.WriteRawFiles();
                     //corpusManager.WriteTokenFiles();
